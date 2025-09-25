@@ -212,8 +212,8 @@ function getCurrentLocation() {
             },
             {
                 enableHighAccuracy: true,    // Use GPS + network for best accuracy
-                timeout: 30000,              // 30 seconds timeout (longer for better GPS)
-                maximumAge: 60000           // 1 minute cache (fresher location)
+                timeout: 60000,              // 60 seconds timeout (longer for better GPS)
+                maximumAge: 0                // No cache - always get fresh location
             }
         );
     } else {
