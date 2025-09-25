@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Overlay for OBS</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap">
+    <style>
+        body {
+            font-family: 'Roboto Condensed', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        h1, h2 {
+            color: #2196F3;
+        }
+
+        .preview {
+            margin: 20px 0;
+        }
+
+        .setup-steps {
+            margin: 20px 0;
+        }
+
+        .copy-link {
+            font-family: monospace;
+            margin: 10px 0;
+        }
+
+        code {
+            font-family: monospace;
+        }
+
+        iframe {
+            background: transparent;
+        }
+    </style>
+</head>
+<body>
+    <h1>Weather Overlay for OBS</h1>
+    
+    <div class="preview">
+        <iframe src="weather-overlay.html" width="500" height="200" frameborder="0"></iframe>
+    </div>
+
+    <div class="setup-steps">
+        <h2>Setup Instructions</h2>
+        <ol>
+            <li>Open OBS Studio</li>
+            <li>Add a new "Browser" source to your scene</li>
+            <li>Copy this URL for the overlay:
+                <div class="copy-link">weather-overlay.html</div>
+            </li>
+            <li>Set these properties:
+                <ul>
+                    <li>Width: <code>500</code></li>
+                    <li>Height: <code>200</code></li>
+                </ul>
+            </li>
+            <li>Recommended settings:
+                <ul>
+                    <li>✓ Refresh browser when scene becomes active</li>
+                    <li>✓ Shutdown source when not visible</li>
+                    <li>✓ Enable browser source hardware acceleration</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+
+    <h2>Features</h2>
+    <ul>
+        <li>Local time with AM/PM</li>
+        <li>Current temperature in Celsius</li>
+        <li>Weather conditions with color-coded icons</li>
+        <li>Location detection</li>
+        <li>Transparent background for easy integration</li>
+    </ul>
+
+    <h2>Troubleshooting</h2>
+    <ul>
+        <li>If location isn't showing, allow location access in your browser</li>
+        <li>If weather isn't updating, check your internet connection</li>
+        <li>For best results, keep the browser source active</li>
+    </ul>
+</body>
+</html> 

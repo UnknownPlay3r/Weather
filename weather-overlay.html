@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Overlay</title>
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Add Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap">
+    <style>
+        body {
+            margin: 0;
+            padding: 10px;
+            font-family: 'Roboto Condensed', sans-serif;
+            font-weight: 700;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            background: none;  /* Remove background */
+            overflow: hidden;
+        }
+        
+        .weather-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 15px;
+        }
+        
+        .temperature, .weather-info, .location-info, .time-info {
+            font-size: 32px;
+            text-transform: uppercase;
+            color: white;
+            line-height: 1;
+        }
+        
+        .weather-details {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .info-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            height: 32px;
+            line-height: 32px;
+        }
+
+        .time-info {
+            display: flex;
+            align-items: center;
+            height: 32px;
+        }
+
+        .time-info .period {
+            font-size: 18px;
+            margin-left: 4px;
+            color: white;
+            line-height: 1;
+        }
+
+        .fa-clock, .fa-temperature-half, .fa-map-pin, .fas {
+            width: 32px;
+            font-size: 32px;  /* Changed from 28px to match text size */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 32px;
+        }
+
+        .fa-clock {
+            color: #00BFFF;  /* Deep Sky Blue color for clock */
+        }
+
+        .fa-map-pin {
+            color: #FF4444;  /* Red color for location pin */
+        }
+
+        .fa-temperature-half {
+            color: #FFA500;  /* Changed to orange */
+        }
+    </style>
+</head>
+<body>
+    <div class="weather-container">
+        <div class="weather-details">
+            <div class="info-container">
+                <i class="far fa-clock"></i>
+                <div class="time-info" id="local-time"></div>
+            </div>
+            <div class="info-container">
+                <i class="fas fa-temperature-half"></i>
+                <div class="temperature" id="temperature"></div>
+                <i class="fas"></i>
+                <div class="weather-info" id="weather-description"></div>
+            </div>
+            <div class="info-container">
+                <i class="fas fa-map-pin"></i>
+                <div class="location-info" id="location"></div>
+            </div>
+        </div>
+    </div>
+    <script src="weather.js"></script>
+</body>
+</html> 
