@@ -1,4 +1,5 @@
-const API_KEY = '69ff4d838456d90ba2e7a46b03a451aa';
+const API_KEY = '5c22ed1af6789a187b9af240ae59b8a3'; // OpenWeatherMap key
+const WEATHER_API_KEY = 'YOUR_WEATHERAPI_KEY'; // Get from weatherapi.com
 const UNITS = 'metric'; // Use 'imperial' for Fahrenheit
 
 async function getWeatherByCoords(lat, lon) {
@@ -421,7 +422,70 @@ async function getWeatherByCity(cityName) {
     }
 }
 
-// Get weather for current location with improved GPS
+// WeatherAPI.com function (better accuracy for Australia)
+async function getWeatherByLocation(location) {
+    try {
+        console.log(`Fetching weather for: ${location}`);
+        const response = await fetch(
+            `https://api.weatherapi.com/v1/current.json?key=${WEATHER_API_KEY}&q=${encodeURIComponent(location)}&aqi=no`
+        );
+        const data = await response.json();
+        console.log("WeatherAPI data:", data);
+        
+        if (data.error) {
+            console.error('WeatherAPI error:', data.error.message);
+            // Fallback to OpenWeatherMap
+            getWeatherByCoords(-27.3833, 153.0167);
+            return;
+        }
+        
+        // Update the DOM elements
+        updateTime();
+        document.getElementById('temperature').textContent = 
+            `${Math.round(data.current.temp_c)}°C`;
+        
+        // Update weather icon and description
+        const weatherIcon = document.querySelector('.fas:not(.fa-temperature-half):not(.fa-map-pin)');
+        const condition = data.current.condition.text.toLowerCase();
+        
+        weatherIcon.className = 'fas';
+        
+        // WeatherAPI condition mapping
+        if (condition.includes('sun') || condition.includes('clear')) {
+            weatherIcon.classList.add('fa-sun');
+            weatherIcon.style.color = '#FFD700';
+        } else if (condition.includes('cloud')) {
+            weatherIcon.classList.add('fa-cloud');
+            weatherIcon.style.color = '#A9A9A9';
+        } else if (condition.includes('rain')) {
+            weatherIcon.classList.add('fa-cloud-rain');
+            weatherIcon.style.color = '#4682B4';
+        } else if (condition.includes('storm')) {
+            weatherIcon.classList.add('fa-bolt');
+            weatherIcon.style.color = '#FFD700';
+        } else if (condition.includes('snow')) {
+            weatherIcon.classList.add('fa-snowflake');
+            weatherIcon.style.color = '#FFFFFF';
+        } else {
+            weatherIcon.classList.add('fa-cloud');
+            weatherIcon.style.color = '#FFFFFF';
+        }
+        
+        document.getElementById('weather-description').textContent = 
+            data.current.condition.text;
+            
+        // Update location display
+        const locationText = `${data.location.name}, ${data.location.country}`;
+        document.getElementById('location').textContent = locationText;
+        
+    } catch (error) {
+        console.error('Error fetching WeatherAPI data:', error);
+        // Fallback to OpenWeatherMap
+        getWeatherByCoords(-27.3833, 153.0167);
+    }
+}
+
+// Get weather for current location with GPS
 getCurrentLocation();
 
 // Update weather every 5 minutes
